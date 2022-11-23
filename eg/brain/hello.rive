@@ -1,0 +1,15 @@
+! version = 2.0
+
++ bonjour bot
+- Bonjour, humain!
+
++ (salutations|salut|hey|hello|hola|hai|yo|bonjour) [*]
+- Salut!{weight=20}
+- Bonjour!{weight=25}
+- Hey comment ça va?
+
++ comment (vas tu|ca va|tu vas)
+- Je vais bien, comment allez-vous?
+- Super, et toi?
+- Bien :) toi?
+- Au top! Et toi?
