@@ -4,7 +4,7 @@ Discord est un logiciel propriétaire gratuit de VoIP et de messagerie instantan
 
 Conçu initialement pour les communautés de joueurs de jeux vidéo, son utilisation s'est diversifiée avec le temps et compte aujourd'hui plus de 300 millions d'utilisateurs.
 
-L'opbectif de ce TP est de montrer un example d'intégration de Chatbot à une interface de communication, ici Discord. De nombreuses autres intégrations sont possible, et fonctionnent de manière similaires pour tout logiciel de messagerie instantanée:
+L'objectif de ce TP est de montrer un exemple d'intégration de Chatbot à une interface de communication, ici Discord. De nombreuses autres intégrations sont possibles, et fonctionnent de manière similaires pour tout logiciel de messagerie instantanée:
 
 ![Discord login](./common-files/chatbot-architecture.png)
 
@@ -24,11 +24,11 @@ Créez un nouveau serveur Discord en cliquant sur **Ajouter un serveur** en bas 
 
 ![Discord create new server](./common-files/discord-create-serv.png)
 
-Selectionnerionner **Créer le mien**:
+Sélectionner **Créer le mien**:
 
 ![Discord create new server step 1](./common-files/discord-create-serv-1.png)
 
-Selectionnerionner **Pour mes amis et moi**:
+Sélectionner **Pour mes amis et moi**:
 
 ![Discord create new server step 2](./common-files/discord-create-serv-2.png)
 
@@ -42,11 +42,11 @@ Et voilà! Votre serveur devrait être disponible!
 
 ## Application et Bot Discord
 
-Une fois votre serveur créer et accessible, créez une nouvelle application discord en accédant à [Discord Developers](https://discord.com/developers/applications):
+Une fois votre serveur créé et accessible, créez une nouvelle application discord en accédant à [Discord Developers](https://discord.com/developers/applications):
 
 ![Discord new application](./common-files/discord-new-app.png)
 
-Donner un nom à votre application et cliquez sur **Créer**:
+Donnez un nom à votre application et cliquez sur **Créer**:
 
 ![Discord new application name](./common-files/discord-new-app-2.png)
 
