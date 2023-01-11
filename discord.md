@@ -20,7 +20,7 @@ Une fois Discord installé, connectez-vous à votre compte ou créez en un nouve
 
 Pour permettre à votre chatbot the communiquer via un canal Discord vous aurez besoin d'un accès administrateur à un serveur Discord.
 
-Si vous n'avez pas de serveur existant vous pouvez en créer un en cliquant sur **Ajouter un serveur** en bas à gauche de l'application:
+Créez un nouveau serveur Discord en cliquant sur **Ajouter un serveur** en bas à gauche de l'application:
 
 ![Discord create new server](./common-files/discord-create-serv.png)
 
@@ -96,19 +96,50 @@ Votre bot devrait maintenant apparaitre dans les utilisateurs de votre serveur!
 
 ## Connecter votre bot
 
-Modifier votre script Python `script.py` pour ajouter l'integration avec discord:
+Après avoir ouvert votre code existant sur [Gitpod](https://gitpod.io), saisir la commande suivante dans le terminal pour installer la librairie Python `discord`:
+
+```sh
+❯ pip install discord.py
+```
+
+Ensuite, créez un script `script-discord.py` pour ajouter l'integration discord:
 
 ```python
-from rivescript import RiveScript
 import discord
 import os
 
-# Inits Rivescript bot
-bot = RiveScript()
-bot.load_directory("./eg/brain")
-bot.sort_replies()
+# Init Discord client
+intents = discord.Intents.default()
+intents.message_content = True
+client = discord.Client(intents=intents)
 
-# Inits Discord client
+# Handles Discord login event
+@client.event
+async def on_ready():
+    print(f'We have logged in as {client.user}')
+
+# Run discord client using bot token
+client.run(os.environ['DISCORD_TOKEN'])
+```
+
+Lancer le script python:
+
+```sh
+❯ script-discord.py
+```
+Vous deviez maintenant voir votre bot connecté à votre serveur:
+
+![Discord bot connected](./common-files/discord-bot-connected.png)
+
+## Capturer les messages envoyés sur Discord
+
+Modifiez votre script Python `script-discord.py` pour catpurer les messages reçu sur le channel Discord, les afficher dans la console et les renvoyer dans le channel:
+
+```python
+import discord
+import os
+
+# Init Discord client
 intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
@@ -123,22 +154,65 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-
-    if message.content.startswith('$bot '):
-        msg = message.content.replace('$bot ', '')
-        reply = bot.reply("localuser", msg)
-        await message.channel.send(reply)
+    print(f'MESSAGE: {message.content}')
+    await message.channel.send(f'REPONSE: {message.content}')
 
 # Run discord client using bot token
 client.run(os.environ['DISCORD_TOKEN'])
 ```
 
-Lancer le script python:
+Lancer le script:
 
 ```sh
-❯ python script.py
+❯ script-discord.py
 ```
 
-Et voilà! Vous deviez maintenant voir votre bot connecté à votre serveur et pouvez lui envoyer des messages:
+Essayez maintenant d'envoyer un message dans le channel **général** de votre serveur Discord, vous devriez vois ce message affiché dans la console de votre terminal ainsi que dans la réponse de votre bot:
+
+![Discord capture message](./common-files/discord-capture-msg.png)
+
+## Utilisez votre chatbot RiveScript
+
+Modifiez votre script Python `script-discord.py` pour ajouter l'interpreteur RiveScript:
+
+```python
+from rivescript import RiveScript
+import discord
+import os
+
+# Init Rivescript bot
+bot = RiveScript()
+bot.load_directory("./eg/brain")
+bot.sort_replies()
+
+# Init Discord client
+intents = discord.Intents.default()
+intents.message_content = True
+client = discord.Client(intents=intents)
+
+# Handles Discord login event
+@client.event
+async def on_ready():
+    print(f'We have logged in as {client.user}')
+
+# Handles Discord message event
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+    reply = bot.reply("localuser", message.content)
+    await message.channel.send(reply)
+
+# Run discord client using bot token
+client.run(os.environ['DISCORD_TOKEN'])
+```
+
+Lancer le script:
+
+```sh
+❯ script-discord.py
+```
+
+Et voilà! Vous deviez maintenant pouvoir envoyer des messages à votre bot:
 
 ![Discord bot connected](./common-files/discord-end.png)
