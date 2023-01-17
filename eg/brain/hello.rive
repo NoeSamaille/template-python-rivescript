@@ -13,3 +13,9 @@
 - Super, et toi?
 - Bien :) toi?
 - Au top! Et toi?
+
++ (* sera * meteo|* sera * temps|* temps fera) *
+- !!weather_forcast
+
++ (* meteo|* temps) *
+- !!weather
