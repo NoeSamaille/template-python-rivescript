@@ -14,7 +14,11 @@
 - Bien :) toi?
 - Au top! Et toi?
 
-+ (* sera * meteo|* sera * temps|* temps fera) *
+! sub nyc = new york
++ * heure * (paris|montpellier|marseille|londres|new york|tokyo)
+- !!time$$<star3>
+
++ (* sera la meteo|* sera le temps|* temps fera) *
 - !!weather_forcast
 
 + (* meteo|* temps) *
